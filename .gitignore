@@ -2,5 +2,5 @@
 *.iml
 /gen
 /out
-/target
+target/
 /src
