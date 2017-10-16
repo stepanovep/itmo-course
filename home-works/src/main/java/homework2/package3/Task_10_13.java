@@ -28,11 +28,11 @@ public class Task_10_13 {
 
         long symmetricTimeCount = IntStream.rangeClosed(0, 2359)
                 .filter(Task_10_13::isCorrectTime)
-                .mapToObj(Integer::toString)
+                .mapToObj(time -> String.format("%04d", time))
                 .filter(Task_10_13::isPalindrome)
                 .count();
         System.out.println("12. Время-палиндром в день встречается: \n" + symmetricTimeCount + "\n");
-        // 79
+        // 16
 
         long unHappyNumbersCount = IntStream.rangeClosed(1, 100_000)
                 .mapToObj(Integer::toString)
