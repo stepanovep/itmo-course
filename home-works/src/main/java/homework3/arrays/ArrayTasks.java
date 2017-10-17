@@ -1,15 +1,9 @@
 package homework3.arrays;
 
-import homework3.ArraysUtils;
-
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static homework3.ArraysUtils.*;
+import static homework3.ArraysUtils.generateArray;
 import static homework3.ArraysUtils.printArray;
 
 /**
