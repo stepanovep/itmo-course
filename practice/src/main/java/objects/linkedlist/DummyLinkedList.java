@@ -20,7 +20,6 @@ public class DummyLinkedList implements CustomLinkedList {
         return head;
     }
 
-    @Override
     public void add(int x) {
         Node current = head;
         while(current.getNext() != null) {
@@ -29,8 +28,6 @@ public class DummyLinkedList implements CustomLinkedList {
         current.setNext(new Node(x, null));
     }
 
-
-    @Override
     public Node get(int i) {
         if (i < 1) {
             return head;
@@ -48,7 +45,6 @@ public class DummyLinkedList implements CustomLinkedList {
         return null;
     }
 
-    @Override
     public int remove(int i) {
         if (i < 1) {
             System.out.println("cannot remove head Node");

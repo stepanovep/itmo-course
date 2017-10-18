@@ -16,7 +16,6 @@ public class SortedLinkedList implements CustomLinkedList {
         return head;
     }
 
-    @Override
     public void add(int value) {
         Node last = head;
         Node current = head.getNext();
@@ -33,7 +32,6 @@ public class SortedLinkedList implements CustomLinkedList {
         last.setNext(new Node(value, current));
     }
 
-    @Override
     public Node get(int idx) {
         if (idx < 1) {
             return head;
@@ -51,7 +49,6 @@ public class SortedLinkedList implements CustomLinkedList {
         return null;
     }
 
-    @Override
     public int remove(int idx) {
         if (idx < 1) {
             System.out.println("cannot remove head Node");
