@@ -1,6 +1,6 @@
-package homework3;
+package utils;
 
-import java.util.Random;
+import static utils.RandomUtils.generateInt;
 
 /**
  * @author Egor Stepanov
@@ -16,11 +16,10 @@ public class ArraysUtils {
      * @param max максимальное значение
      */
     public static int[] generateArray(int n, int min, int max) {
-        Random rnd = new Random();
         int a[] = new int[n];
 
         for (int i = 0; i < n; i++) {
-            a[i] = min + rnd.nextInt(max-min+1);
+            a[i] = generateInt(min, max);
         }
 
         return a;
@@ -30,7 +29,6 @@ public class ArraysUtils {
      * Сгенерировать двумерный массив из случайных целых чисел
      */
     public static int[][] generate2dArray(int n, int m, int min, int max) {
-        Random rnd = new Random();
         int[][] a = new int[n][m];
         for (int i = 0; i < n; i++) {
             a[i] = generateArray(m, min, max);
@@ -65,8 +63,8 @@ public class ArraysUtils {
      * Вывести двумерный массив в стандартный вывод
      */
     public static void printArray(int[][] a) {
-        for (int i = 0; i < a.length; i++) {
-            printArray(a[i]);
+        for (int[] array : a) {
+            printArray(array);
         }
         System.out.println();
     }

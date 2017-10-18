@@ -1,12 +1,13 @@
 package homework3.multiarrays;
 
+import utils.RandomUtils;
+
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
-import static homework3.ArraysUtils.generate2dArray;
-import static homework3.ArraysUtils.printArray;
+import static utils.ArraysUtils.generate2dArray;
+import static utils.ArraysUtils.printArray;
 
 public class MultiArraysTasks {
 
@@ -59,10 +60,9 @@ public class MultiArraysTasks {
         int N = 15;
         Set<String> prods = new HashSet<>();
 
-        Random rnd = new Random();
-        while(prods.size() < 15) {
-            int x = rnd.nextInt(8) + 2;
-            int y = rnd.nextInt(8) + 2;
+        while (prods.size() < 15) {
+            int x = RandomUtils.generateInt(1, 9);
+            int y = RandomUtils.generateInt(1, 9);
             if (x > y) {
                 int tmp = x;
                 x = y;
@@ -71,7 +71,7 @@ public class MultiArraysTasks {
             prods.add(x + "" + y);
         }
 
-        for(String prod: prods) {
+        for (String prod: prods) {
             System.out.println(String.format("%c x %c", prod.charAt(0), prod.charAt(1)));
         }
     }

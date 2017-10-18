@@ -3,8 +3,8 @@ package homework3.arrays;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static homework3.ArraysUtils.generateArray;
-import static homework3.ArraysUtils.printArray;
+import static utils.ArraysUtils.generateArray;
+import static utils.ArraysUtils.printArray;
 
 /**
  * @author Egor Stepanov
