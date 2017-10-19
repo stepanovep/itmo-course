@@ -1,4 +1,4 @@
-package objects.linkedlist;
+package homework4.linkedlist;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
