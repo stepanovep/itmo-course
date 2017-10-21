@@ -14,16 +14,20 @@ public class Point {
         this.y = y;
     }
 
-    static Point of(double x, double y) {
+    public static Point of(double x, double y) {
         return new Point(x, y);
     }
 
-    double getX() {
+    public double getX() {
         return x;
     }
 
-    double getY() {
+    public double getY() {
         return y;
+    }
+
+    public Point plus(double x, double y) {
+        return new Point(this.x + x, this.y + y);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class Point {
                 '}';
     }
 
-    static double distance(Point p1, Point p2) {
+    public static double distance(Point p1, Point p2) {
         return Math.sqrt((p1.getX() - p2.getX())*(p1.getX() - p2.getX()) +
                          (p1.getY() - p2.getY())*(p1.getY() - p2.getY()));
     }
