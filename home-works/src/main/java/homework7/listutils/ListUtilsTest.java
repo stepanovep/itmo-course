@@ -22,6 +22,9 @@ public class ListUtilsTest {
         List<String> filteredList = ListUtils.filter((str) -> str.length() < 4, list);
         Assert.assertEquals(filteredList.size(), 1);
         Assert.assertEquals(filteredList.get(0), "F4");
+
+        Integer i1 = 125;
+        Integer i2 = 125;
     }
 
     @Test

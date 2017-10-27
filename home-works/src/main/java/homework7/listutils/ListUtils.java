@@ -9,7 +9,10 @@ import java.util.function.Predicate;
  * @author Egor Stepanov
  * @since 26-10-2017.
  */
-public class ListUtils {
+public final class ListUtils {
+
+    private ListUtils() {
+    }
 
     public static <T> T find(Predicate<T> predicate, Iterable<T> list) {
         for (T element: list) {

@@ -1,5 +1,6 @@
 package homework7.lazyAccumulator;
 
+import homework7.iterablelist.LinkedList;
 import homework7.iterablelist.Stack;
 import homework7.lazyAccumulator.LazyAccumulator.Operation;
 
@@ -23,9 +24,16 @@ public class LazyAccumulatorStack {
     }
 
     public int calculate() {
+        Stack<Operation> rightOperations = new LinkedList<>();
         Operation operation;
+
         while (operations.top() != null) {
             operation = operations.pop();
+            rightOperations.push(operation);
+        }
+
+        while (rightOperations.top() != null) {
+            operation = rightOperations.pop();
             value = operation.apply(value, operation.getArgument());
         }
         return value;
