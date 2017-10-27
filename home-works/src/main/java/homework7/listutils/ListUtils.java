@@ -39,6 +39,15 @@ public class ListUtils {
         return transformedList;
     }
 
+    public static <T> T get(T obj, List<T> list) {
+        for (T element: list) {
+            if (obj.equals(element)) {
+                return element;
+            }
+        }
+        return null;
+    }
+
     public interface Transformer<T> {
         T transform(T obj);
     }
