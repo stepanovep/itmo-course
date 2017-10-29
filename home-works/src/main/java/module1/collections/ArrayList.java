@@ -206,4 +206,29 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         return true;
     }
+
+    @Override
+    public List<T> clone() {
+        List<T> cloneList = new ArrayList<>(size);
+        for (T current: this) {
+            cloneList.add(current);
+        }
+
+        return cloneList;
+    }
+
+    @Override
+    public String toString() {
+        if (size == 0) {
+            return "Empty ArrayList";
+        }
+        StringBuilder stringBuilder = new StringBuilder("ArrayList: {");
+        for (int i = 0; i < size-1; i++) {
+            stringBuilder.append(get(i));
+            stringBuilder.append(", ");
+        }
+        stringBuilder.append(get(size-1));
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
 }

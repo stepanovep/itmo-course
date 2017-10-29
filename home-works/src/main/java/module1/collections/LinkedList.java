@@ -247,7 +247,7 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
 
         @Override
         public int hashCode() {
-            return value.hashCode(); //todo next maybe?
+            return value.hashCode();
         }
 
         @Override
@@ -298,5 +298,35 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
             }
         }
         return true;
+    }
+
+    @Override
+    public List<T> clone() {
+        List<T> cloneList = new LinkedList<>();
+        Node current = head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+            cloneList.add(current.getValue());
+        }
+
+        return cloneList;
+    }
+
+    @Override
+    public String toString() {
+        if (size == 0) {
+            return "Empty LinkedList";
+        }
+        StringBuilder stringBuilder = new StringBuilder("LinkedList: {");
+        Node current = head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+            stringBuilder.append(current.getValue());
+            if (current != tail) {
+                stringBuilder.append(", ");
+            }
+        }
+        stringBuilder.append('}');
+        return stringBuilder.toString();
     }
 }

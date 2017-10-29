@@ -31,4 +31,10 @@ public interface List<T> extends Iterable<T> {
      * Получить количество элементов в списке
      */
     int size();
+
+    /**
+     * Получить копию списка
+     */
+    List<T> clone();
+
 }
