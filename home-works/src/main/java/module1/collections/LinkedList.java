@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Реализация структук данных Queue, Stack и List
@@ -245,11 +246,57 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         }
 
         @Override
+        public int hashCode() {
+            return value.hashCode(); //todo next maybe?
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return super.equals(obj);
+        }
+
+        @Override
         public String toString() {
             return "Node{" +
                     "value=" + value +
                     ", next=" + next +
                     '}';
         }
+    }
+
+    @Override
+    public int hashCode() {
+        Node current = head;
+        int result = size;
+        while (current.getNext() != null) {
+            current = current.getNext();
+            result = 31*result + current.getValue().hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null || !(obj instanceof LinkedList)) {
+            return false;
+        }
+
+        LinkedList<T> other = (LinkedList<T>) obj;
+        if (size != other.size()) {
+            return false;
+        }
+        Node current = head;
+        Node otherCurrent = other.getHead();
+        while(current.getNext() != null) {
+            current = current.getNext();
+            otherCurrent = otherCurrent.getNext();
+            if (!Objects.equals(current.getValue(), otherCurrent.getValue())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

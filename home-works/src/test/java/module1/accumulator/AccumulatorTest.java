@@ -1,5 +1,10 @@
-package module1.accumulator.operation;
+package module1.accumulator;
 
+import module1.accumulator.operation.Divide;
+import module1.accumulator.operation.Minus;
+import module1.accumulator.operation.Multiply;
+import module1.accumulator.operation.Plus;
+import module1.accumulator.operation.Power;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

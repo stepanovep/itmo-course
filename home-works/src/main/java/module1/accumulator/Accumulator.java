@@ -1,4 +1,6 @@
-package module1.accumulator.operation;
+package module1.accumulator;
+
+import module1.accumulator.operation.Operation;
 
 /**
  * @author Egor Stepanov
@@ -9,16 +11,16 @@ public class Accumulator {
     private int value;
     private final Operation operation;
 
-    Accumulator(int value, Operation operation) {
+    public Accumulator(int value, Operation operation) {
         this.value = value;
         this.operation = operation;
     }
 
-    void accumulate(int p) {
+    public void accumulate(int p) {
         value =  operation.doOperation(value, p);
     }
 
-    int getValue() {
+    public int getValue() {
         return value;
     }
 

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import static java.lang.System.arraycopy;
 
@@ -172,5 +173,37 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
                 return (T) list[current_idx++];
             }
         };
+    }
+
+    @Override
+    public int hashCode() {
+        int result = size;
+        for (int i = 0; i < size; i++) {
+            T current = get(i);
+            result += 31*result + (current != null ? current.hashCode() : 0);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null || !(obj instanceof ArrayList)) {
+            return false;
+        }
+
+        ArrayList<T> other = (ArrayList<T>) obj;
+        if (size != other.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < size; i++) {
+            if (!Objects.equals(this.get(i), other.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

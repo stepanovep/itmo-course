@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
  * @since 18/10/2017.
  */
 public class SortedLinkedListTest {
+
     @Test
     public static void sortedListTest() {
         SortedLinkedList list = new SortedLinkedList(1);
