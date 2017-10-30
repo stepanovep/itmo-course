@@ -180,7 +180,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         int result = size;
         for (int i = 0; i < size; i++) {
             T current = get(i);
-            result += 31*result + (current != null ? current.hashCode() : 0);
+            result += 31*result + (current != null ? current.hashCode() : 0) + i;
         }
         return result;
     }
@@ -230,5 +230,9 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         stringBuilder.append(get(size-1));
         stringBuilder.append('}');
         return stringBuilder.toString();
+    }
+
+    public static <T> List<T> emptyList() {
+        return new ArrayList<>(10);
     }
 }

@@ -268,6 +268,7 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
     public int hashCode() {
         Node current = head;
         int result = size;
+
         while (current.getNext() != null) {
             current = current.getNext();
             result = 31*result + current.getValue().hashCode();
@@ -328,5 +329,9 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         stringBuilder.append('}');
         return stringBuilder.toString();
+    }
+
+    public static <T> List<T> emptyList() {
+        return new LinkedList<>();
     }
 }

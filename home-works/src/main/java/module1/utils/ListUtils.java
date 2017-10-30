@@ -1,5 +1,6 @@
 package module1.utils;
 
+import module1.collections.ArrayList;
 import module1.collections.LinkedList;
 import module1.collections.List;
 
@@ -54,6 +55,18 @@ public final class ListUtils {
     }
 
     /**
+     * Определить, находится ли заданный элемент в списке
+     */
+    public static <T> boolean contains(T obj, List<T> list) {
+        for (T element: list) {
+            if (obj.equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Обобщенный метод contains()
      * Возвращает элемент или null
      */
@@ -68,5 +81,57 @@ public final class ListUtils {
 
     public interface Transformer<T> {
         T transform(T obj);
+    }
+
+    /**
+     * Преобразовать массив элементов в список
+     */
+    public static <T> List<T> toList(T[] array) {
+        List<T> list = new ArrayList<>(array.length);
+        for (T element: array) {
+            list.add(element);
+        }
+
+        return list;
+    }
+
+    /**
+     * Вернуть пересечение двух списков
+     */
+    public static <T> List<T> intersect(List<T> list1, List<T> list2) {
+        List<T> intersectList;
+        if (list1 instanceof ArrayList) {
+            intersectList = ArrayList.emptyList();
+        } else {
+            intersectList = LinkedList.emptyList();
+        }
+
+        for (T element: list1) {
+            if (ListUtils.contains(element, list2)) {
+                intersectList.add(element);
+            }
+        }
+
+        return intersectList;
+    }
+
+    /**
+     * Вернуть разность двух списков
+     */
+    public static <T> List<T> difference(List<T> list1, List<T> list2) {
+        List<T> differenceList;
+        if (list1 instanceof ArrayList) {
+            differenceList = ArrayList.emptyList();
+        } else {
+            differenceList = LinkedList.emptyList();
+        }
+
+        for (T element: list1) {
+            if (!ListUtils.contains(element, list2)) {
+                differenceList.add(element);
+            }
+        }
+
+        return differenceList;
     }
 }

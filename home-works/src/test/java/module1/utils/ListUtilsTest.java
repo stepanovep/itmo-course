@@ -50,4 +50,36 @@ public class ListUtilsTest {
         Assert.assertEquals(transformedList.get(1), "12");
         Assert.assertEquals(transformedList.get(2), "F4");
     }
+
+    @Test
+    public void intersectListTest() {
+        List<String> list1 = new ArrayList<>(10);
+        list1.add("123");
+        list1.add("345");
+
+        List<String> list2 = new ArrayList<>(10);
+        list2.add("345");
+        list2.add("456");
+
+        List<String> intersectList = ListUtils.intersect(list1, list2);
+
+        Assert.assertEquals(intersectList.size(), 1);
+        Assert.assertEquals(intersectList.get(0), "345");
+    }
+
+    @Test
+    public void differenceListTest() {
+        List<String> list1 = new ArrayList<>(10);
+        list1.add("123");
+        list1.add("345");
+
+        List<String> list2 = new ArrayList<>(10);
+        list2.add("345");
+        list2.add("456");
+
+        List<String> differenceList = ListUtils.difference(list1, list2);
+
+        Assert.assertEquals(differenceList.size(), 1);
+        Assert.assertEquals(differenceList.get(0), "123");
+    }
 }
