@@ -16,7 +16,7 @@ import java.util.Iterator;
 @RunWith(Parameterized.class)
 public class IteratorTest {
 
-    public List<Integer> list;
+    private List<Integer> list;
 
     public IteratorTest(List<Integer> list) {
         this.list = list;

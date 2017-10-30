@@ -1,8 +1,5 @@
 package module1.library;
 
-import module1.collections.ArrayList;
-import module1.collections.List;
-import module1.utils.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,33 +18,66 @@ public class LibraryHashProbing implements Library {
     private int size;
     private boolean isFull;
 
-    private List<Book> books;
+    private Book[] books;
+    private int hashSize;
 
-    public LibraryHashProbing(int initialHashCapacity, int maxSize) {
+    public LibraryHashProbing(int initialHashSize, int maxSize) {
         this.maxSize = maxSize;
-        this.books = new ArrayList<>(initialHashCapacity);
+        this.books = new Book[initialHashSize];
+        this.hashSize = initialHashSize;
         this.size = 0;
         this.isFull = false;
     }
 
     @Override
     public int addBooks(Book book, int quantity) {
-        int hashIndex = Math.abs(book.hashCode()) % size;
+        int hashIndex = Math.abs(book.hashCode()) % hashSize;
 
-        while(books.get((hashIndex++) % size) == null);
-
-        Book foundBook = ListUtils.get(book, books);
-        if (foundBook == null) {
-            books.add(hashIndex, new Book(book, quantity));
-        } else {
-            books.add(hashIndex, new Book(book, book.getQuantity() + quantity));
+        while (books[hashIndex] != null && !books[hashIndex].equals(book)) {
+            hashIndex = (hashIndex+1) % hashSize;
         }
-        return quantity;
+        int beforeQuantity = books[hashIndex] == null ? 0 : books[hashIndex].getQuantity();
+        int availableToAdd = Math.min(maxSize - size, quantity);
+
+        books[hashIndex] = new Book(book, beforeQuantity + availableToAdd);
+        size += availableToAdd;
+
+        if (size == maxSize) {
+            isFull = true;
+            log.info("The library gets full. size = {}", maxSize);
+        }
+
+        return availableToAdd;
     }
 
     @Override
     public int getBooks(Book book, int quantity) {
-        return 0;
+        int hashIndex = Math.abs(book.hashCode()) % hashSize;
+
+        while (books[hashIndex] != null && !books[hashIndex].equals(book)) {
+            hashIndex = (hashIndex + 1) % hashSize;
+            if (hashIndex == hashSize) {
+                log.info("The library is full. Cannot add new books");
+                return 0;
+            }
+        }
+
+        if (books[hashIndex] == null) {
+            log.info("There is no such book in the library: {}", book);
+            return 0;
+        }
+
+        int beforeQuantity = books[hashIndex].getQuantity();
+        int availableToGet = Math.min(beforeQuantity, quantity);
+
+        books[hashIndex] = new Book(book, beforeQuantity - quantity);
+        size -= availableToGet;
+
+        if (availableToGet > 0) {
+            isFull = false;
+        }
+
+        return availableToGet;
     }
 
     @Override
