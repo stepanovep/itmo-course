@@ -82,4 +82,28 @@ public class ListUtilsTest {
         Assert.assertEquals(differenceList.size(), 1);
         Assert.assertEquals(differenceList.get(0), "123");
     }
+
+    @Test
+    public void iteratorViewTest() {
+        List<Integer> list1 = new ArrayList<>(10);
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+        list1.add(4);
+
+        List<Integer> list2 = new ArrayList<>(10);
+        list2.add(10);
+        list2.add(20);
+        list2.add(30);
+        list2.add(40);
+
+        Iterable<Integer> iterable = ListUtils.view(
+                ListUtils.filterView(list1, t -> (t % 2 == 0)),
+                ListUtils.transformView(list2, t -> t/5)
+        );
+
+        for (Integer element: iterable) {
+            System.out.println(element);
+        }
+    }
 }

@@ -4,6 +4,7 @@ import module1.collections.ArrayList;
 import module1.collections.LinkedList;
 import module1.collections.List;
 
+import java.util.Iterator;
 import java.util.function.Predicate;
 
 /**
@@ -133,5 +134,75 @@ public final class ListUtils {
         }
 
         return differenceList;
+    }
+
+    @SafeVarargs
+    public static <T> Iterable<T> view(Iterable<T> ... its) {
+        Iterator<T>[] iterators = new Iterator[its.length];
+        for (int i = 0; i < its.length; i++) {
+            iterators[i] = its[i].iterator();
+        }
+
+        return () -> new Iterator<T>() {
+            private final int iteratorsCount = its.length;
+            private int itIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                if (itIndex == iteratorsCount) {
+                    return false;
+                }
+                if (iterators[itIndex].hasNext()) {
+                    return true;
+                }
+                itIndex++;
+                return hasNext();
+            }
+
+            @Override
+            public T next() {
+                return iterators[itIndex].next();
+            }
+        };
+    }
+
+    public static <T> Iterable<T> filterView(Iterable<T> iterable, Predicate<T> predicate) {
+        Iterator<T> iterator = iterable.iterator();
+
+        return () -> new Iterator<T>() {
+            T next = null;
+
+            @Override
+            public boolean hasNext() {
+                while(iterator.hasNext()) {
+                    next = iterator.next();
+                    if (predicate.test(next)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public T next() {
+                return next;
+            }
+        };
+    }
+
+    public static <T> Iterable<T> transformView(Iterable<T> iterable, Transformer<T> transformer) {
+        Iterator<T> iterator = iterable.iterator();
+
+        return () -> new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return transformer.transform(iterator.next());
+            }
+        };
     }
 }
