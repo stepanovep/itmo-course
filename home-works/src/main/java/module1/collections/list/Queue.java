@@ -1,4 +1,4 @@
-package module1.collections;
+package module1.collections.list;
 
 /**
  * Интерфейс - очередь

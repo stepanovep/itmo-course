@@ -1,6 +1,6 @@
 package module1.accumulator.lazy;
 
-import module1.collections.List;
+import module1.collections.list.List;
 
 /**
  * @author Egor Stepanov

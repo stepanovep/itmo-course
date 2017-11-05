@@ -1,8 +1,8 @@
 package module1.accumulator.lazy;
 
 import module1.accumulator.lazy.LazyAccumulator.Operation;
-import module1.collections.LinkedList;
-import module1.collections.Stack;
+import module1.collections.list.LinkedList;
+import module1.collections.list.Stack;
 
 /**
  * @author Egor Stepanov

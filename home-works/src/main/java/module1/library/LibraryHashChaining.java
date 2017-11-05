@@ -1,7 +1,7 @@
 package module1.library;
 
-import module1.collections.LinkedList;
-import module1.collections.List;
+import module1.collections.list.LinkedList;
+import module1.collections.list.List;
 import module1.utils.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

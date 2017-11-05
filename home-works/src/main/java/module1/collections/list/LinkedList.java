@@ -1,4 +1,4 @@
-package module1.collections;
+package module1.collections.list;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

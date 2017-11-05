@@ -1,8 +1,8 @@
 package module1.utils;
 
-import module1.collections.ArrayList;
-import module1.collections.LinkedList;
-import module1.collections.List;
+import module1.collections.list.ArrayList;
+import module1.collections.list.LinkedList;
+import module1.collections.list.List;
 import org.junit.Test;
 import org.testng.Assert;
 

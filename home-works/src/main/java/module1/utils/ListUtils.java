@@ -1,8 +1,8 @@
 package module1.utils;
 
-import module1.collections.ArrayList;
-import module1.collections.LinkedList;
-import module1.collections.List;
+import module1.collections.list.ArrayList;
+import module1.collections.list.LinkedList;
+import module1.collections.list.List;
 
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -11,6 +11,7 @@ import java.util.function.Predicate;
  * @author Egor Stepanov
  * @since  26-10-2017.
  */
+@SuppressWarnings("WeakerAccess")
 public final class ListUtils {
 
     private ListUtils() {
@@ -136,7 +137,11 @@ public final class ListUtils {
         return differenceList;
     }
 
+    /**
+     * Вернуть "общий" Iterable для группы коллекций
+     */
     @SafeVarargs
+    @SuppressWarnings("unchecked")
     public static <T> Iterable<T> view(Iterable<T> ... its) {
         Iterator<T>[] iterators = new Iterator[its.length];
         for (int i = 0; i < its.length; i++) {
@@ -166,6 +171,9 @@ public final class ListUtils {
         };
     }
 
+    /**
+     * Вернуть фильтрованный Iterable для группы коллекций
+     */
     public static <T> Iterable<T> filterView(Iterable<T> iterable, Predicate<T> predicate) {
         Iterator<T> iterator = iterable.iterator();
 
@@ -190,6 +198,10 @@ public final class ListUtils {
         };
     }
 
+    /**
+     * Вернуть общий Iterable для группы коллекций,
+     * элементы которых преобразованы transformer'ом
+     */
     public static <T> Iterable<T> transformView(Iterable<T> iterable, Transformer<T> transformer) {
         Iterator<T> iterator = iterable.iterator();
 

@@ -6,7 +6,7 @@ package module1.enums;
  */
 public enum Planet {
 
-    MERCUCY(0.033, 2438, 58),
+    MERCURY(0.033, 2438, 58),
     VENUS(0.487, 6051, 108),
     EARTH(0.59, 6371, 150),
     MARS(0.064, 3389, 228),

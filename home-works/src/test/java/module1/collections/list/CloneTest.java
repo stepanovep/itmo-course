@@ -1,4 +1,4 @@
-package module1.collections;
+package module1.collections.list;
 
 import org.junit.Assert;
 import org.junit.Test;

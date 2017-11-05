@@ -1,6 +1,6 @@
 package module1.accumulator.lazy;
 
-import module1.collections.LinkedList;
+import module1.collections.list.LinkedList;
 import org.junit.Test;
 import org.testng.Assert;
 
