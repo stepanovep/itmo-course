@@ -9,14 +9,21 @@ import java.util.List;
 public class WarAndPeace {
 
     private static final Logger log = LoggerFactory.getLogger(WarAndPeace.class);
-    private static final String PATH_TO_THE_BOOK = "war_and_peace.txt";
+    private static final String FILE_NAME = "war_and_peace.txt";
 
     public static String getLongestWord() {
-        List<String> words = FileUtils.readAllWordsFromTheFile(PATH_TO_THE_BOOK);
-        return words.get(0);
+        List<String> words = FileUtils.readAllWordsFromTheFile(FILE_NAME);
+        String maxWord = "";
+        for (String word: words) {
+            if (word.length() > maxWord.length()) {
+                maxWord = word;
+            }
+        }
+
+        return maxWord;
     }
 
     public static void main(String[] args) {
-        System.out.println(getLongestWord());
+        System.out.println(getLongestWord().length());
     }
 }

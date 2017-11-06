@@ -40,6 +40,7 @@ public class FileUtils {
                 }
             }
             return words;
+
         } catch (IOException e) {
             log.error("Failed to read file: {}", fileName);
             return Collections.emptyList();
