@@ -1,5 +1,7 @@
 package module1.message.model;
 
+import module1.utils.RandomUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,8 +32,8 @@ public class UserGenerator {
         for (int i = 0; i < num; i++) {
             users.add(new User(
                     NAMES.get(rnd.nextInt(NAMES.size())),
-                    generateInRange(MIN_AGE, MAX_AGE, rnd),
-                    round(generateInRange(MIN_SALARY, MAX_SALARY, rnd), 1000),
+                    RandomUtils.generateInt(MIN_AGE, MAX_AGE),
+                    round(RandomUtils.generateInt(MIN_SALARY, MAX_SALARY), 1000),
                     COMPANIES.get(rnd.nextInt(COMPANIES.size()))
             ));
         }
