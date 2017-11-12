@@ -37,4 +37,8 @@ public interface List<T> extends Iterable<T> {
      */
     List<T> clone();
 
+    /**
+     * Получить пустой список
+     */
+    List<T> emptyList();
 }

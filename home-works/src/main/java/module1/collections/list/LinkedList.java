@@ -3,6 +3,7 @@ package module1.collections.list;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -32,6 +33,8 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
      * Количество элементов в списке
      */
     private int size;
+
+    private int modCount = 0;
 
     public LinkedList() {
         this.head = new Node(null, null, null);
@@ -68,14 +71,15 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         last.setNext(newNode);
         size++;
+        modCount++;
         log.info("[list]: Node {} added in position {}", newNode, idx);
     }
 
     @Override
     public T get(int idx) {
-        if (idx < 0 || idx > size-1) {
+        if (idx < 0 || idx >= size) {
             log.info("index: {} - should be in range [0, {}].", idx, size-1);
-            return null;
+            throw new IndexOutOfBoundsException();
         }
         int k = 0;
         Node current = head.getNext();
@@ -102,6 +106,7 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         last.setNext(current.getNext());
         size--;
+        modCount++;
         log.info("Removed node: {}", current);
         return current.getValue();
     }
@@ -128,6 +133,7 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         Node polledNode = head.getNext();
         head.setNext(polledNode.getNext());
         size--;
+        modCount++;
         log.info("[queue]: Polled node: {}", polledNode);
         return polledNode.getValue();
     }
@@ -158,6 +164,7 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         tail = poppedNode.getLast();
         tail.setNext(null);
         size--;
+        modCount++;
         log.info("[stack]: Popped node: {}", poppedNode);
         return poppedNode.getValue();
     }
@@ -181,11 +188,13 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
             tail = newNode;
         }
         size++;
+        modCount++;
         return newNode;
     }
 
     @Override
     public Iterator<T> iterator() {
+        int expectedModCount = modCount;
         return new Iterator<T>() {
             Node current = head.getNext();
 
@@ -196,6 +205,9 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
 
             @Override
             public T next() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (current == null) {
                     return null;
                 }
@@ -331,7 +343,7 @@ public class LinkedList<T> implements Queue<T>, Stack<T>, List<T> {
         return stringBuilder.toString();
     }
 
-    public static <T> List<T> emptyList() {
+    public List<T> emptyList() {
         return new LinkedList<>();
     }
 }

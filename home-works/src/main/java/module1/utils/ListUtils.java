@@ -102,11 +102,7 @@ public final class ListUtils {
      */
     public static <T> List<T> intersect(List<T> list1, List<T> list2) {
         List<T> intersectList;
-        if (list1 instanceof ArrayList) {
-            intersectList = ArrayList.emptyList();
-        } else {
-            intersectList = LinkedList.emptyList();
-        }
+        intersectList = list1.emptyList();
 
         for (T element: list1) {
             if (ListUtils.contains(element, list2)) {
@@ -122,11 +118,7 @@ public final class ListUtils {
      */
     public static <T> List<T> difference(List<T> list1, List<T> list2) {
         List<T> differenceList;
-        if (list1 instanceof ArrayList) {
-            differenceList = ArrayList.emptyList();
-        } else {
-            differenceList = LinkedList.emptyList();
-        }
+        differenceList = list1.emptyList();
 
         for (T element: list1) {
             if (!ListUtils.contains(element, list2)) {

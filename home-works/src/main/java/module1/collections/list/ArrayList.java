@@ -3,6 +3,7 @@ package module1.collections.list;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -22,11 +23,17 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
     private Object[] list;
     private int capacity;
     private int size;
+    private int modCount = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 10;
 
     public ArrayList(int initialCapacity) {
         this.capacity = initialCapacity;
         this.list = new Object[initialCapacity];
         size = 0;
+    }
+
+    public ArrayList() {
+        new ArrayList<>(DEFAULT_INITIAL_CAPACITY);
     }
 
     // ---------- List -------------
@@ -44,6 +51,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         list[idx] = obj;
         size++;
+        modCount++;
         log.info("[list]: Element {} added in position {}", obj, idx);
     }
 
@@ -52,7 +60,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
     public T get(int idx) {
         if (idx < 0 || idx >= size) {
             log.info("index: {} - should be in range [0, {}].", idx, size-1);
-            return null;
+            throw new IndexOutOfBoundsException();
         }
         return (T) list[idx];
     }
@@ -67,6 +75,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         arraycopy(list, idx + 1, list, idx, size - 1 - idx);
         list[size-1] = null;
         size--;
+        modCount++;
         log.info("[list]: Removed element: {}", elementToRemove);
         return elementToRemove;
     }
@@ -85,6 +94,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         list[size] = obj;
         size++;
+        modCount++;
         log.info("[queue]: Added element: {}", obj);
     }
 
@@ -119,6 +129,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         }
         list[size] = obj;
         size++;
+        modCount++;
         log.info("[stack]: Pushed element: {}", obj);
     }
 
@@ -131,6 +142,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         T topElement = get(size-1);
         list[size-1] = null;
         size--;
+        modCount++;
         log.info("[stack]: Popped element: {}", topElement);
         return topElement;
     }
@@ -156,6 +168,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
 
     @Override
     public Iterator<T> iterator() {
+        int expectedModCount = modCount;
         return new Iterator<T>() {
             int current_idx = 0;
 
@@ -167,6 +180,9 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
             @Override
             @SuppressWarnings("unchecked")
             public T next() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (current_idx >= size) {
                     return null;
                 }
@@ -232,7 +248,7 @@ public final class ArrayList<T> implements Queue<T>, Stack<T>, List<T> {
         return stringBuilder.toString();
     }
 
-    public static <T> List<T> emptyList() {
+    public List<T> emptyList() {
         return new ArrayList<>(10);
     }
 }
