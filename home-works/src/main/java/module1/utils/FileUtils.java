@@ -46,4 +46,14 @@ public class FileUtils {
             return Collections.emptyList();
         }
     }
+
+    public static byte[] xorBytes(byte[] b, byte[] password) {
+        byte[] xored = new byte[b.length];
+
+        for (int i = 0; i < b.length; i++) {
+            xored[i] = (byte)(b[i] ^ password[i % password.length]);
+        }
+
+        return xored;
+    }
 }
