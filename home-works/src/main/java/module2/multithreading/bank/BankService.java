@@ -20,11 +20,21 @@ public class BankService {
             return TxResult.NOT_ENOUGH;
         }
 
+        if (src.getId() < dest.getId()) {
+            return doTransfer(src, dest, amount);
+        } else {
+            return doTransfer(dest, src, -amount);
+        }
+    }
+
+    private TxResult doTransfer(Account src, Account dest, int amount) {
         synchronized (src) {
-            src.decBalance(amount);
-            dest.incBalance(amount);
-            log.info("Transaction from {} to {} is successful", src.getId(), dest.getId());
-            return TxResult.SUCCESS;
+            synchronized (dest) {
+                src.withDraw(amount);
+                dest.deposit(amount);
+                log.info("Transaction from {} to {} is successful", src.getId(), dest.getId());
+                return TxResult.SUCCESS;
+            }
         }
     }
 

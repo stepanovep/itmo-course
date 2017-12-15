@@ -30,11 +30,11 @@ public class Account {
         return userId;
     }
 
-    public void decBalance(int amount) {
+    public void withDraw(int amount) {
         this.balance -= amount;
     }
 
-    public void incBalance(int amount) {
+    public void deposit(int amount) {
         this.balance += amount;
     }
 
