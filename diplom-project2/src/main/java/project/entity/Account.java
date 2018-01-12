@@ -1,6 +1,7 @@
 package project.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 @Data
+@EqualsAndHashCode(of = {"name, email"})
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
