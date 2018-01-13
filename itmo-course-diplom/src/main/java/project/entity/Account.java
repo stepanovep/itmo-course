@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     private String name;
 

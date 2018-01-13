@@ -9,6 +9,6 @@ import project.entity.Account;
  * @since 12-01-2018.
  */
 @Repository
-public interface AccountRepository extends CrudRepository<Account, Integer> {
+public interface AccountRepository extends CrudRepository<Account, Long> {
 
 }

@@ -9,7 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import project.entity.Account;
+import project.entity.CurrencyRate;
 import project.repository.AccountRepository;
+import project.repository.CurrencyRateRepository;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Egor Stepanov
@@ -21,9 +27,13 @@ import project.repository.AccountRepository;
 public class Application implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private CurrencyRateRepository currencyRateRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -37,7 +47,10 @@ public class Application implements CommandLineRunner {
             log.info("Crud find all(): account - {}", account.getName());
         }
 
-        accountRepository.deleteAll();
+        scheduler.scheduleAtFixedRate(() -> System.out.println("bhal"), 0, 10, TimeUnit.SECONDS);
+        CurrencyRate currencyRate = currencyRateRepository.getCurrencyRate();
+        log.info("dollar/rubble rate is: {}", currencyRate.getDollar());
+        log.info("euro/rubble rate is: {}", currencyRate.getEuro());
     }
 }
 
