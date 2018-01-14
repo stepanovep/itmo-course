@@ -25,17 +25,16 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    runtime('org.springframework.boot:spring-boot-devtools')
-    compile group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.springframework.boot:spring-boot-starter-web',
+            'com.google.code.findbugs:annotations:3.0.1',
+            'org.postgresql:postgresql:42.1.4',
+            'org.projectlombok:lombok:1.16.18',
+            'org.slf4j:slf4j-api:1.7.25'
 
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    runtime 'org.springframework.boot:spring-boot-devtools'
 
-    compile('org.postgresql:postgresql:42.1.4')
-    compile('org.projectlombok:lombok:1.16.18')
-    compile('org.slf4j:slf4j-api:1.7.25')
-    testCompile('org.slf4j:slf4j-log4j12:1.7.25')
-
-    testCompile('junit:junit:4.12')
+    testCompile 'org.springframework.boot:spring-boot-starter-test',
+                'org.slf4j:slf4j-log4j12:1.7.25',
+                'junit:junit:4.12'
 }

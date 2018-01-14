@@ -21,7 +21,7 @@ import project.service.CurrencyRateService;
 @SpringBootApplication
 @EntityScan("project.entity")
 @EnableJpaRepositories("project.repository")
-@ComponentScan(basePackages = {"project.executor", "project.service" })
+@ComponentScan(basePackages = {"project"})
 public class Application implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -41,6 +41,7 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        accountRepository.deleteAll();
         accountRepository.save(new Account("egor", "egor@egor"));
 
         for (Account account : accountRepository.findAll()) {

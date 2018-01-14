@@ -1,9 +1,17 @@
 package project.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import project.command.transfer.RefundCommand;
 import project.command.transfer.TransferCommand;
+import project.entity.Account;
+import project.repository.AccountRepository;
 
 /**
  * @author Egor Stepanov
@@ -12,9 +20,33 @@ import project.command.transfer.TransferCommand;
 @RestController
 public class TransferController {
 
+    private static final Logger log = LoggerFactory.getLogger(TransferController.class);
+
+    @Autowired
+    private AccountRepository accountRepository;
+
     @Autowired
     private TransferCommand transferCommand;
 
     @Autowired
     private RefundCommand refundCommand;
+
+    @GetMapping(
+            value = "/get"
+    )
+    public String save() {
+        accountRepository.save(new Account("testSave", "blah@sdf.sd"));
+        log.info("new account saved into repository");
+        return "get - OK";
+    }
+
+    @PostMapping(value = "/post",
+            consumes = {"application/json"},
+            produces = {"application/json"}
+    )
+    public ResponseEntity<Account> post(@RequestBody Account account) {
+        log.info("post request argument: name={}", account.getName());
+        account.setName("postedName");
+        return ResponseEntity.ok(account);
+    }
 }

@@ -31,6 +31,6 @@ public final class CurrencyRateService {
             Double euro = 45.0;
             currencyRateRepository.save(new CurrencyRate(dollar, euro));
             log.info("currency rates updated: dollar={}, euro={}", dollar, euro);
-        }, 0, 10, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.MINUTES);
     }
 }
