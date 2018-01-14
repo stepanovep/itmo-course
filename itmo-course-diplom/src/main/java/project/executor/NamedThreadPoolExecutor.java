@@ -23,10 +23,11 @@ public class NamedThreadPoolExecutor extends ThreadPoolExecutor implements AutoC
     NamedThreadPoolExecutor(@Nonnull String threadPoolName,
                             int corePoolSize,
                             @Nonnull BlockingQueue<Runnable> workQueue) {
-        super(corePoolSize, corePoolSize, 0L, TimeUnit.SECONDS, Objects.requireNonNull(workQueue, "workQueue"));
+        super(corePoolSize, corePoolSize, 0L, TimeUnit.SECONDS,
+                Objects.requireNonNull(workQueue, "workQueue"),
+                new NamedThreadFactory(Objects.requireNonNull(threadPoolName, "threadPoolName")));
         this.threadPoolName = threadPoolName;
     }
-
 
     @Nonnull
     public String getThreadPoolName() {
