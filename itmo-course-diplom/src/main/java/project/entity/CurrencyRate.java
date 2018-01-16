@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 /**
+ * Курс иностранных валют по отношению к рублю
+ *
  * @author Egor Stepanov
  * @since  14-01-2018.
  */

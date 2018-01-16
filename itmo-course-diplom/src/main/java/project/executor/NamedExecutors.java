@@ -6,6 +6,8 @@ import javax.annotation.Nonnull;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
+ * Фабрика и утилитный класс для {@link NamedThreadPoolExecutor}
+ *
  * @author Egor Stepanov
  * @since  14-01-2018.
  */

@@ -12,6 +12,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Сервис для {@link CurrencyRate}
+ *
  * @author Egor Stepanov
  * @since  14-01-2018.
  */

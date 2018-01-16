@@ -15,8 +15,10 @@ import project.repository.CurrencyRateRepository;
 import project.service.CurrencyRateService;
 
 /**
+ * Класс для старта приложения
+ *
  * @author Egor Stepanov
- * @since 11-01-2018.
+ * @since  11-01-2018.
  */
 @SpringBootApplication
 @EntityScan("project.entity")

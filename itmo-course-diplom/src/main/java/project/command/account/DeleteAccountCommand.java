@@ -7,6 +7,8 @@ import project.command.CommandResult;
 import project.repository.AccountRepository;
 
 /**
+ * Команда для удаления счета из БД
+ *
  * @author Egor Stepanov
  * @since 13-01-2018.
  */

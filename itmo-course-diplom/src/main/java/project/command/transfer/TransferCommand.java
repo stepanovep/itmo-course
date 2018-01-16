@@ -5,8 +5,10 @@ import project.command.Command;
 import project.command.CommandResult;
 
 /**
+ * Команда для перевода средсв между счетами
+ *
  * @author Egor Stepanov
- * @since 13-01-2018.
+ * @since  13-01-2018.
  */
 @Component
 public class TransferCommand implements Command<TransferRequest, TransferResponse> {

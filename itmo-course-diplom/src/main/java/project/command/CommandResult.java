@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Result of {@link Command}
+ * Результат выполнения {@link Command}
  *
  * @author Egor Stepanov
  * @since  13-01-2018.

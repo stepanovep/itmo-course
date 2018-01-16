@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * Доменная сущность, представляющая элемент таблицы ACCOUNT
+ *
  * @author Egor Stepanov
  * @since 12-01-2018.
  */

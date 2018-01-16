@@ -10,6 +10,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Именованный исполнитель потока
+ *
  * @author Egor Stepanov
  * @since  14-01-2018.
  */

@@ -5,6 +5,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * Фабрика для именованных потоков
+ *
  * @author Egor Stepanov
  * @since  14-01-2018.
  */

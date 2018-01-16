@@ -30,7 +30,8 @@ dependencies {
             'com.google.code.findbugs:annotations:3.0.1',
             'org.postgresql:postgresql:42.1.4',
             'org.projectlombok:lombok:1.16.18',
-            'org.slf4j:slf4j-api:1.7.25'
+            'org.slf4j:slf4j-api:1.7.25',
+            'joda-time:joda-time:2.9.9'
 
     runtime 'org.springframework.boot:spring-boot-devtools'
 

@@ -8,8 +8,10 @@ import project.command.account.DeleteAccountCommand;
 import project.command.account.UpdateAccountCommand;
 
 /**
+ * Контроллер для команд работающий с аккаунтом
+ *
  * @author Egor Stepanov
- * @since 13-01-2018.
+ * @since  13-01-2018.
  */
 @RestController
 @RequestMapping(value = "/account")

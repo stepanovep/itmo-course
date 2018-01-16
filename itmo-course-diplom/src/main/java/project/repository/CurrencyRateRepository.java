@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 import project.entity.CurrencyRate;
 
 /**
+ * Репозиторий для {@link CurrencyRate}
+ *
  * @author Egor Stepanov
- * @since 14-01-2018.
+ * @since  14-01-2018.
  */
 @Repository
 public interface CurrencyRateRepository extends CrudRepository<CurrencyRate, Long> {

@@ -14,8 +14,10 @@ import project.entity.Account;
 import project.repository.AccountRepository;
 
 /**
+ * Контроллер для команд работающих с переводами
+ *
  * @author Egor Stepanov
- * @since 13-01-2018.
+ * @since  13-01-2018.
  */
 @RestController
 public class TransferController {

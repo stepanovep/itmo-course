@@ -5,8 +5,10 @@ import project.command.Command;
 import project.command.CommandResult;
 
 /**
+ * Команда для возврата средств на счет пользователя
+ *
  * @author Egor Stepanov
- * @since 13-01-2018.
+ * @since  13-01-2018.
  */
 @Component
 public class RefundCommand implements Command<RefundRequest, RefundResponse> {

@@ -8,8 +8,10 @@ import project.entity.Account;
 import project.repository.AccountRepository;
 
 /**
+ * Команда для изменения данных счета
+ *
  * @author Egor Stepanov
- * @since 13-01-2018.
+ * @since  13-01-2018.
  */
 @Component
 public class UpdateAccountCommand implements Command<Account, Void> {
