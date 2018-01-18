@@ -3,13 +3,20 @@ package project.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
+import project.command.CommandResponse;
 import project.command.transfer.RefundCommand;
 import project.command.transfer.TransferCommand;
+import project.command.transfer.TransferRequest;
+import project.command.transfer.TransferResponse;
+import project.engine.executor.ProjectCommandExecutor;
 import project.entity.Account;
 import project.repository.AccountRepository;
 
@@ -20,6 +27,11 @@ import project.repository.AccountRepository;
  * @since  13-01-2018.
  */
 @RestController
+@RequestMapping(
+        value = "/",
+        produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
+)
 public class TransferController {
 
     private static final Logger log = LoggerFactory.getLogger(TransferController.class);
@@ -33,22 +45,19 @@ public class TransferController {
     @Autowired
     private RefundCommand refundCommand;
 
-    @GetMapping(
-            value = "/get"
-    )
+    @Autowired
+    private ProjectCommandExecutor transferCommandExecutor;
+
+    @GetMapping(value = "get")
     public String save() {
         accountRepository.save(new Account("testSave", "blah@sdf.sd"));
         log.info("new account saved into repository");
         return "get - OK";
     }
 
-    @PostMapping(value = "/post",
-            consumes = {"application/json"},
-            produces = {"application/json"}
-    )
-    public ResponseEntity<Account> post(@RequestBody Account account) {
-        log.info("post request argument: name={}", account.getName());
-        account.setName("postedName");
-        return ResponseEntity.ok(account);
+    @PostMapping(value = "transfer")
+    public DeferredResult<ResponseEntity<CommandResponse<TransferResponse>>> transfer(@RequestBody TransferRequest request) {
+        log.info("request={}", request);
+        return transferCommandExecutor.executeCommand(transferCommand, request);
     }
 }

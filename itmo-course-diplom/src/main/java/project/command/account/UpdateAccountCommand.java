@@ -3,7 +3,7 @@ package project.command.account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import project.command.Command;
-import project.command.CommandResult;
+import project.command.CommandResponse;
 import project.entity.Account;
 import project.repository.AccountRepository;
 
@@ -20,7 +20,7 @@ public class UpdateAccountCommand implements Command<Account, Void> {
     private AccountRepository accountRepository;
 
     @Override
-    public CommandResult<Void> execute(Account account) {
+    public CommandResponse<Void> execute(Account account) {
         return null;
     }
 }

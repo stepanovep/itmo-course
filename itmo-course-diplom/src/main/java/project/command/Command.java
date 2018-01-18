@@ -12,5 +12,5 @@ public interface Command<RequestT, ResponseT> {
     /**
      * Execute a command
      */
-    CommandResult<ResponseT> execute(RequestT requestT);
+    CommandResponse<ResponseT> execute(RequestT requestT);
 }

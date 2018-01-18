@@ -12,7 +12,7 @@ import java.util.Optional;
  * @author Egor Stepanov
  * @since  13-01-2018.
  */
-public final class CommandResult<T> {
+public final class CommandResponse<T> {
 
     @Nonnull
     private final Status status;
@@ -23,9 +23,9 @@ public final class CommandResult<T> {
     @Nullable
     private final String comment;
 
-    public CommandResult(@Nonnull Status status,
-                         @Nullable T result,
-                         @Nullable String comment) {
+    public CommandResponse(@Nonnull Status status,
+                           @Nullable T result,
+                           @Nullable String comment) {
         this.status = Objects.requireNonNull(status, "status");
         this.result = result;
         this.comment = comment;
@@ -55,20 +55,20 @@ public final class CommandResult<T> {
     /**
      * Вернуть SUCCESS результат с телом ответа
      */
-    public static <U> CommandResult<U> success(@Nullable U result) {
-        return new CommandResult<>(Status.SUCCESS, result, null);
+    public static <U> CommandResponse<U> success(@Nullable U result) {
+        return new CommandResponse<>(Status.SUCCESS, result, null);
     }
 
     /**
      * Вернуть ERROR результат с пояснением ошибки
      */
-    public static <U> CommandResult<U> error(@Nullable String comment) {
-        return new CommandResult<>(Status.ERROR, null, comment);
+    public static <U> CommandResponse<U> error(@Nullable String comment) {
+        return new CommandResponse<>(Status.ERROR, null, comment);
     }
 
     @Override
     public String toString() {
-        return "CommandResult{" +
+        return "CommandResponse{" +
                 "status=" + status +
                 ", result=" + result +
                 ", comment='" + comment + '\'' +

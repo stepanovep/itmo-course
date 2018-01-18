@@ -5,7 +5,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import project.entity.Account;
 import project.repository.AccountRepository;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
 /**
@@ -20,7 +20,7 @@ public class ApplicationTest {
 
     @Test
     public void test() {
-        when(accountRepository.findOne(anyInt())).thenReturn(new Account("blah", "test@test.ru"));
-        System.out.println(accountRepository.findOne(1).getName());
+        when(accountRepository.findOne(anyLong())).thenReturn(new Account("blah", "test@test.ru"));
+        System.out.println(accountRepository.findOne(1L).getName());
     }
 }

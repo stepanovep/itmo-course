@@ -2,7 +2,7 @@ package project.command.transfer;
 
 import org.springframework.stereotype.Component;
 import project.command.Command;
-import project.command.CommandResult;
+import project.command.CommandResponse;
 
 /**
  * Команда для возврата средств на счет пользователя
@@ -14,7 +14,7 @@ import project.command.CommandResult;
 public class RefundCommand implements Command<RefundRequest, RefundResponse> {
 
     @Override
-    public CommandResult<RefundResponse> execute(RefundRequest refundRequest) {
+    public CommandResponse<RefundResponse> execute(RefundRequest refundRequest) {
         return null;
     }
 }

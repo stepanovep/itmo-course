@@ -8,8 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import project.entity.Account;
+import project.properties.ApplicationProperties;
 import project.repository.AccountRepository;
 import project.repository.CurrencyRateRepository;
 import project.service.CurrencyRateService;
@@ -24,6 +26,9 @@ import project.service.CurrencyRateService;
 @EntityScan("project.entity")
 @EnableJpaRepositories("project.repository")
 @ComponentScan(basePackages = {"project"})
+@Import(value = {
+        ApplicationConfiguration.class
+})
 public class Application implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -36,6 +41,9 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private CurrencyRateRepository currencyRateRepository;
+
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -51,6 +59,9 @@ public class Application implements CommandLineRunner {
         }
 
         currencyRateService.startUpdatingQueue();
+
+        log.info("var1 is {}", applicationProperties.getVar1());
+        log.info("var2 is {}", applicationProperties.getVar2());
     }
 }
 
