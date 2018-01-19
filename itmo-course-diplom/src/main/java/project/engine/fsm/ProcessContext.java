@@ -15,4 +15,9 @@ public interface ProcessContext<StageT extends ProcessStage> {
      * Текущий стэйдж процесса
      */
     StageT getStage();
+
+    /**
+     * Установить стэйдж
+     */
+    void setStage(StageT stage);
 }

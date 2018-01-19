@@ -9,9 +9,10 @@ import project.command.CommandResponse;
 import project.engine.fsm.Process;
 import project.engine.fsm.TransferContext;
 import project.engine.fsm.TransferProcessExecutor;
+import project.engine.fsm.TransferStage;
 
 /**
- * Команда для перевода средсв между счетами
+ * Команда для перевода средств между счетами
  *
  * @author Egor Stepanov
  * @since  13-01-2018.
@@ -29,8 +30,13 @@ public class TransferCommand implements Command<TransferRequest, TransferRespons
         log.info("TransferCommand(): request={}", transferRequest);
 
         TransferContext context = TransferContext.createContext();
+        context.setRequest(transferRequest);
         Process process = new Process(context, 123L);
         transferProcessExecutor.execute(process);
+
+        if (context.getStage() == TransferStage.FAILED) {
+            return CommandResponse.error(context.getErrorMessage());
+        }
 
         TransferResponse response = TransferResponse.builder()
                 .comment("comment test")

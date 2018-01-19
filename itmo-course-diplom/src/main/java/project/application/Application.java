@@ -47,9 +47,6 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        accountRepository.deleteAll();
-        accountRepository.save(new Account("egor", "egor@egor"));
-
         for (Account account : accountRepository.findAll()) {
             log.info("Crud find all(): account - {}", account.getName());
         }

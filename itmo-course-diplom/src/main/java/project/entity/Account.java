@@ -48,4 +48,12 @@ public class Account {
         this.name = name;
         this.contact = contact;
     }
+
+    public void withdraw(Double amount) {
+        balance -= amount;
+    }
+
+    public void deposit(Double amount) {
+        balance += amount;
+    }
 }
