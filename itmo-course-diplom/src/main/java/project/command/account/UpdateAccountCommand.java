@@ -2,7 +2,6 @@ package project.command.account;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import project.command.Command;
 import project.command.CommandResponse;
@@ -21,8 +20,11 @@ public class UpdateAccountCommand implements Command<UpdateAccountRequest, Void>
 
     private static final Logger log = LoggerFactory.getLogger(UpdateAccountCommand.class);
 
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+
+    public UpdateAccountCommand(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Override
     public CommandResponse<Void> execute(UpdateAccountRequest request) {

@@ -2,7 +2,6 @@ package project.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.entity.CurrencyRate;
 import project.properties.ApplicationProperties;
@@ -22,17 +21,20 @@ import java.util.concurrent.TimeUnit;
 @Service
 public final class CurrencyRateService {
 
-    @Autowired
-    private CurrencyRateRepository currencyRateRepository;
-
-    @Autowired
-    private ApplicationProperties applicationProperties;
-
     private static final Logger log = LoggerFactory.getLogger(CurrencyRateService.class);
+
+    private final CurrencyRateRepository currencyRateRepository;
+    private final ApplicationProperties applicationProperties;
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     private static final Random rnd = new Random();
+
+    public CurrencyRateService(CurrencyRateRepository currencyRateRepository,
+                               ApplicationProperties applicationProperties) {
+        this.currencyRateRepository = currencyRateRepository;
+        this.applicationProperties = applicationProperties;
+    }
 
     public void startUpdatingQueue() {
         scheduler.scheduleAtFixedRate(() -> {
