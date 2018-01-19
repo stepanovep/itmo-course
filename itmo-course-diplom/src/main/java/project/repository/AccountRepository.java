@@ -34,4 +34,8 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     @Modifying(clearAutomatically = true)
     @Query("update Account a set a.name = :name, a.contact = :contact where a.id = :id")
     void updateAccount(@Param("id") Long id, @Param("name") String name, @Param("contact") String contact);
+
+    @Query("update Account a set a.balance = :balance where a.id = :id")
+    @Modifying
+    void setBalance(@Param("id") Long id, @Param("balance") Double balance);
 }

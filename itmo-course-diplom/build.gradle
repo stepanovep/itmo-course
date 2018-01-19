@@ -36,6 +36,6 @@ dependencies {
     runtime 'org.springframework.boot:spring-boot-devtools'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test',
-                'org.slf4j:slf4j-log4j12:1.7.25',
+                //'org.slf4j:slf4j-log4j12:1.7.25',
                 'junit:junit:4.12'
 }

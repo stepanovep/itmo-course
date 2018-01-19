@@ -55,6 +55,12 @@ public class Account {
         this.contact = contact;
     }
 
+    public Account(String name, String contact, Double balance) {
+        this.name = name;
+        this.contact = contact;
+        this.balance = balance;
+    }
+
     public void withdraw(Double amount) {
         balance -= amount;
     }
