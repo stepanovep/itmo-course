@@ -13,7 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import project.entity.Account;
 import project.properties.ApplicationProperties;
 import project.repository.AccountRepository;
-import project.repository.CurrencyRateRepository;
 import project.service.CurrencyRateService;
 
 /**
@@ -38,9 +37,6 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private CurrencyRateService currencyRateService;
-
-    @Autowired
-    private CurrencyRateRepository currencyRateRepository;
 
     @Autowired
     private ApplicationProperties applicationProperties;

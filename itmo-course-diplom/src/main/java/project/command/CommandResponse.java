@@ -1,10 +1,13 @@
 package project.command;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Результат выполнения {@link Command}
@@ -12,6 +15,7 @@ import java.util.Optional;
  * @author Egor Stepanov
  * @since  13-01-2018.
  */
+@Builder
 public final class CommandResponse<T> {
 
     @Nonnull
@@ -21,34 +25,43 @@ public final class CommandResponse<T> {
     private final T result;
 
     @Nullable
-    private final String comment;
+    private final String errorMessage;
 
-    public CommandResponse(@Nonnull Status status,
-                           @Nullable T result,
-                           @Nullable String comment) {
+    @JsonCreator
+    public CommandResponse(@Nonnull @JsonProperty("status") Status status,
+                           @Nullable @JsonProperty("result") T result,
+                           @Nullable @JsonProperty("errorMessage") String errorMessage) {
         this.status = Objects.requireNonNull(status, "status");
         this.result = result;
-        this.comment = comment;
+        this.errorMessage = errorMessage;
     }
 
     @Nonnull
+    @JsonProperty("status")
     public Status getStatus() {
         return status;
     }
 
-    @Nonnull
-    public Optional<T> getResult() {
-        return Optional.ofNullable(result);
+    @Nullable
+    @JsonProperty("result")
+    public T getResult() {
+        return result;
     }
 
-    @Nonnull
-    public Optional<String> getComment() {
-        return Optional.ofNullable(comment);
+    @Nullable
+    @JsonProperty("errorMessage")
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     public enum Status {
+        @JsonProperty("success")
         SUCCESS,
+
+        @JsonProperty("progress")
         PROGRESS,
+
+        @JsonProperty("error")
         ERROR
     }
 
@@ -56,14 +69,29 @@ public final class CommandResponse<T> {
      * Вернуть SUCCESS результат с телом ответа
      */
     public static <U> CommandResponse<U> success(@Nullable U result) {
-        return new CommandResponse<>(Status.SUCCESS, result, null);
+        return CommandResponse.<U>builder()
+                .status(Status.SUCCESS)
+                .result(result)
+                .build();
     }
 
     /**
-     * Вернуть ERROR результат с пояснением ошибки
+     * Вернуть SUCCESS результат с пустым телом
      */
-    public static <U> CommandResponse<U> error(@Nullable String comment) {
-        return new CommandResponse<>(Status.ERROR, null, comment);
+    public static CommandResponse success() {
+        return CommandResponse.builder()
+                .status(Status.SUCCESS)
+                .build();
+    }
+
+    /**
+     * Вернуть ERROR результат с описанием ошибки
+     */
+    public static <U> CommandResponse<U> error(@Nullable String errorMessage) {
+        return CommandResponse.<U>builder()
+                .status(Status.ERROR)
+                .errorMessage(errorMessage)
+                .build();
     }
 
     @Override
@@ -71,7 +99,7 @@ public final class CommandResponse<T> {
         return "CommandResponse{" +
                 "status=" + status +
                 ", result=" + result +
-                ", comment='" + comment + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
                 '}';
     }
 }
