@@ -2,7 +2,6 @@ package project.engine.fsm;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import project.command.transfer.TransferRequest;
 import project.entity.Account;
@@ -23,11 +22,14 @@ public class TransferProcessExecutor implements ProcessExecutor<Process<Transfer
 
     private static final Logger log = LoggerFactory.getLogger(TransferProcessExecutor.class);
 
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+    private final TransactionRepository transactionRepository;
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    public TransferProcessExecutor(AccountRepository accountRepository,
+                                   TransactionRepository transactionRepository) {
+        this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
+    }
 
     @Nonnull
     @Override

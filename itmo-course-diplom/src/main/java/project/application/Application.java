@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import project.entity.Account;
-import project.properties.ApplicationProperties;
 import project.repository.AccountRepository;
 import project.service.CurrencyRateService;
 
@@ -38,9 +37,6 @@ public class Application implements CommandLineRunner {
     @Autowired
     private CurrencyRateService currencyRateService;
 
-    @Autowired
-    private ApplicationProperties applicationProperties;
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -52,8 +48,6 @@ public class Application implements CommandLineRunner {
         }
 
         currencyRateService.startUpdatingQueue();
-
-        log.info("var1 is {}", applicationProperties.getTransferExecutorThreadPoolSize());
     }
 }
 

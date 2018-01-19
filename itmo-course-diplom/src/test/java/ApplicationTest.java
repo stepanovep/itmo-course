@@ -2,11 +2,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import project.entity.Account;
+import project.command.transfer.TransferCommand;
+import project.command.transfer.TransferRequest;
 import project.repository.AccountRepository;
-
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Egor Stepanov
@@ -18,9 +16,17 @@ public class ApplicationTest {
     @Mock
     private AccountRepository accountRepository;
 
+    private TransferCommand transferCommand;
+
     @Test
     public void test() {
-        when(accountRepository.findOne(anyLong())).thenReturn(new Account("blah", "test@test.ru"));
-        System.out.println(accountRepository.findOne(1L).getName());
+
+        TransferRequest request = TransferRequest.builder()
+                .accountIdFrom(123L)
+                .accountIdTo(200L)
+                .amount(314.15)
+                .build();
+
+        transferCommand.execute(request);
     }
 }

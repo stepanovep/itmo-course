@@ -2,7 +2,6 @@ package project.command.transfer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import project.command.Command;
 import project.command.CommandResponse;
@@ -24,10 +23,13 @@ public class TransferCommand implements Command<TransferRequest, TransferRespons
 
     private static final Logger log = LoggerFactory.getLogger(TransferCommand.class);
 
-    @Autowired
-    private TransferProcessExecutor transferProcessExecutor;
+    private final TransferProcessExecutor transferProcessExecutor;
 
     private AtomicLong processCounter = new AtomicLong(0L);
+
+    public TransferCommand(TransferProcessExecutor transferProcessExecutor) {
+        this.transferProcessExecutor = transferProcessExecutor;
+    }
 
     @Override
     public CommandResponse<TransferResponse> execute(TransferRequest transferRequest) {

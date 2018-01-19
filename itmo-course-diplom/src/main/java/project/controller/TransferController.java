@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import project.command.CommandResponse;
-import project.command.transfer.RefundCommand;
 import project.command.transfer.TransferCommand;
 import project.command.transfer.TransferRequest;
 import project.command.transfer.TransferResponse;
@@ -41,9 +40,6 @@ public class TransferController {
 
     @Autowired
     private TransferCommand transferCommand;
-
-    @Autowired
-    private RefundCommand refundCommand;
 
     @Autowired
     private ProjectCommandExecutor transferCommandExecutor;
