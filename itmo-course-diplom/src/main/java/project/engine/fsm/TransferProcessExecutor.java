@@ -66,6 +66,7 @@ public class TransferProcessExecutor implements ProcessExecutor<Process<Transfer
             log.info("Executing stage: {}", ctx.getStage());
 
             accountFrom.withdraw(request.getAmount());
+            accountRepository.save(accountFrom);
             ctx.setStage(TransferStage.TRANSFER_GATE_TO_RECIPIENT);
         }
 
@@ -73,6 +74,7 @@ public class TransferProcessExecutor implements ProcessExecutor<Process<Transfer
             log.info("Executing stage: {}", ctx.getStage());
 
             accountTo.deposit(request.getAmount());
+            accountRepository.save(accountTo);
             ctx.setStage(TransferStage.INSERT_TRANSACTION);
         }
 

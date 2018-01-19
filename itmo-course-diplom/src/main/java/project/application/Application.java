@@ -48,13 +48,12 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         for (Account account : accountRepository.findAll()) {
-            log.info("Crud find all(): account - {}", account.getName());
+            log.info("Crud find all(): account={}", account);
         }
 
         currencyRateService.startUpdatingQueue();
 
-        log.info("var1 is {}", applicationProperties.getVar1());
-        log.info("var2 is {}", applicationProperties.getVar2());
+        log.info("var1 is {}", applicationProperties.getTransferExecutorThreadPoolSize());
     }
 }
 
