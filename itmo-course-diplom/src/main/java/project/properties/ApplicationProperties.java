@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties("test")
+@ConfigurationProperties("settings")
 public class ApplicationProperties {
 
-    private String var1;
-    private int var2;
+    private int currencyQueuePeriod;
+    private int accountExecutorThreadPoolSize;
+    private int transferExecutorThreadPoolSize;
 }

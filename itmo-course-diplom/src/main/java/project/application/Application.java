@@ -11,9 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import project.entity.Account;
-import project.properties.ApplicationProperties;
 import project.repository.AccountRepository;
-import project.repository.CurrencyRateRepository;
 import project.service.CurrencyRateService;
 
 /**
@@ -39,29 +37,17 @@ public class Application implements CommandLineRunner {
     @Autowired
     private CurrencyRateService currencyRateService;
 
-    @Autowired
-    private CurrencyRateRepository currencyRateRepository;
-
-    @Autowired
-    private ApplicationProperties applicationProperties;
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        accountRepository.deleteAll();
-        accountRepository.save(new Account("egor", "egor@egor"));
-
         for (Account account : accountRepository.findAll()) {
-            log.info("Crud find all(): account - {}", account.getName());
+            log.info("Crud find all(): account={}", account);
         }
 
         currencyRateService.startUpdatingQueue();
-
-        log.info("var1 is {}", applicationProperties.getVar1());
-        log.info("var2 is {}", applicationProperties.getVar2());
     }
 }
 

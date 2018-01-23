@@ -34,8 +34,8 @@ public class TransferRequest {
 
     @JsonCreator
     private TransferRequest(@Nonnull @JsonProperty("accountIdFrom") Long accountIdFrom,
-                           @Nonnull @JsonProperty("accountIdTo") Long accountIdTo,
-                           @Nonnull @JsonProperty("amount") Double amount) {
+                            @Nonnull @JsonProperty("accountIdTo") Long accountIdTo,
+                            @Nonnull @JsonProperty("amount") Double amount) {
         this.accountIdFrom = Objects.requireNonNull(accountIdFrom, "accountIdFrom");
         this.accountIdTo = Objects.requireNonNull(accountIdTo, "accountIdTo");
         this.amount = amount;

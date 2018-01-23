@@ -1,11 +1,13 @@
 package project.application;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.engine.executor.DeferredResultExecutor;
 import project.engine.executor.NamedExecutors;
 import project.engine.executor.NamedThreadPoolExecutor;
 import project.engine.executor.ProjectCommandExecutor;
+import project.properties.ApplicationProperties;
 
 /**
  * @author Egor Stepanov
@@ -14,14 +16,17 @@ import project.engine.executor.ProjectCommandExecutor;
 @Configuration
 public class ApplicationConfiguration {
 
+    @Autowired
+    private ApplicationProperties applicationProperties;
+
     @Bean
     NamedThreadPoolExecutor transferThreadPoolExecutor() {
-        return NamedExecutors.createExecutor("Transfer", 10);
+        return NamedExecutors.createExecutor("transferPool", applicationProperties.getTransferExecutorThreadPoolSize());
     }
 
     @Bean
     NamedThreadPoolExecutor accountThreadPoolExecutor() {
-        return NamedExecutors.createExecutor("Account", 5);
+        return NamedExecutors.createExecutor("accountPool", applicationProperties.getAccountExecutorThreadPoolSize());
     }
 
     @Bean

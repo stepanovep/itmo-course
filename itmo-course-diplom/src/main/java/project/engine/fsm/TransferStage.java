@@ -9,14 +9,24 @@ package project.engine.fsm;
 public enum TransferStage implements ProcessStage {
 
     /**
-     *
+     * Шаг валидации контекста
      */
-     STAGE_1(10, "stage1", State.ROLL),
+     VALIDATE_CONTEXT(10, "validateContext", State.ROLL),
 
      /**
-     *
+     * Шаг перевода средств от отправителя в банк
      */
-    STAGE_2(20, "stage2", State.ROLL),
+    TRANFSER_PAYER_TO_GATE(20, "transferPayerToGate", State.ROLL),
+
+    /**
+     * Шаг перевода средств от банка к получателю
+     */
+    TRANSFER_GATE_TO_RECIPIENT(30, "transferGateToRecipient", State.ROLL),
+
+    /**
+     * Шаг сохранения истории о транзакции в базу
+     */
+    INSERT_TRANSACTION(40, "insertTransaction", State.ROLL),
 
     /**
      * Процесс завершен с успехом
